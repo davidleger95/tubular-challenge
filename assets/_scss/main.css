@@ -1,6 +1,6 @@
 /* line 1, /Users/David/Documents/tubular-challenge/assets/_scss/main.scss */
 body {
-  background: green; }
+  background: white; }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
@@ -416,11 +416,112 @@ html, body {
 
 /* line 1, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
 .search-bar {
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 50px; }
+  height: 50px;
+  background: #ff5b5b;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); }
+  /* line 12, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+  .search-bar .brand {
+    font-size: 1.2em;
+    float: left;
+    color: white;
+    font-weight: 400;
+    padding: 0 10px; }
+  /* line 19, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+  .search-bar form.search {
+    padding: 10px;
+    float: left; }
+  /* line 25, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+  .search-bar input, .search-bar .toggle li {
+    margin: 0px;
+    border: none;
+    background: rgba(255, 255, 255, 0.8);
+    color: #ff5b5b;
+    padding: 8px 15px; }
+    /* line 32, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+    .search-bar input:last-child, .search-bar .toggle li:last-child {
+      border-radius: 0 20px 20px 0; }
+    /* line 36, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+    .search-bar input:first-child, .search-bar .toggle li:first-child {
+      border-radius: 20px 0 0 20px; }
+    /* line 39, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+    .search-bar input:focus, .search-bar .toggle li:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.9); }
+    /* line 43, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+    .search-bar input[type="submit"], .search-bar .toggle li[type="submit"] {
+      background-color: white; }
+  /* line 48, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+  .search-bar .toggle {
+    list-style: none;
+    margin: 10px;
+    cursor: pointer; }
+    /* line 53, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+    .search-bar .toggle li {
+      float: left; }
+      /* line 55, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_search.scss */
+      .search-bar .toggle li.off {
+        background: none;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        padding: 7px 15px;
+        color: white; }
+
+/* line 1, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_sidebar.scss */
+.sidebar {
+  z-index: 1;
+  position: fixed;
+  top: 50px;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  color: white;
+  background: rgba(74, 74, 74, 0.9);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  overflow-y: auto; }
+  /* line 16, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_sidebar.scss */
+  .sidebar ul {
+    list-style: none;
+    padding: 0; }
+    /* line 20, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_sidebar.scss */
+    .sidebar ul li {
+      padding: 10px;
+      border-bottom: 1px solid black;
+      overflow: auto; }
+    /* line 26, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_sidebar.scss */
+    .sidebar ul .status {
+      position: absolute;
+      right: 10px;
+      border-radius: 10px;
+      padding: 3px 5px;
+      background: lightgreen;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 800; }
+      /* line 35, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_sidebar.scss */
+      .sidebar ul .status.closed {
+        background: #ff5b5b; }
+    /* line 41, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_sidebar.scss */
+    .sidebar ul .info {
+      float: right;
+      width: calc(100% - 50px); }
+    /* line 46, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_sidebar.scss */
+    .sidebar ul .thumb {
+      display: block;
+      height: 50px;
+      width: 50px;
+      float: left; }
+    /* line 52, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_sidebar.scss */
+    .sidebar ul h3, .sidebar ul address, .sidebar ul .rating {
+      margin: 0;
+      margin-left: 10px;
+      font-weight: 400; }
+    /* line 58, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_sidebar.scss */
+    .sidebar ul address {
+      font-size: 0.8em; }
 
 /* line 1, /Users/David/Documents/tubular-challenge/assets/_scss/1-modules/_map.scss */
 #map {

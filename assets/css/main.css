@@ -1,5 +1,5 @@
 body {
-  background: green; }
+  background: white; }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
@@ -380,11 +380,10 @@ html, body {
   background: #ff5b5b;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); }
   .search-bar .brand {
+    line-height: 50px;
     font-size: 1.2em;
-    float: left;
     color: white;
-    font-weight: 400;
-    padding: 0 10px; }
+    font-weight: 400; }
   .search-bar form.search {
     padding: 10px;
     float: left; }
@@ -403,10 +402,13 @@ html, body {
       background: rgba(255, 255, 255, 0.9); }
     .search-bar input[type="submit"], .search-bar .toggle li[type="submit"] {
       background-color: white; }
+  .search-bar .right {
+    float: right; }
   .search-bar .toggle {
     list-style: none;
     margin: 10px;
-    cursor: pointer; }
+    cursor: pointer;
+    float: right; }
     .search-bar .toggle li {
       float: left; }
       .search-bar .toggle li.off {
@@ -430,12 +432,16 @@ html, body {
     list-style: none;
     padding: 0; }
     .sidebar ul li {
+      position: relative;
       padding: 10px;
       border-bottom: 1px solid black;
       overflow: auto; }
+      .sidebar ul li div {
+        padding: 10px 0; }
     .sidebar ul .status {
       position: absolute;
-      right: 10px;
+      top: 70px;
+      left: 10px;
       border-radius: 10px;
       padding: 3px 5px;
       background: lightgreen;
@@ -446,16 +452,45 @@ html, body {
         background: #ff5b5b; }
     .sidebar ul .info {
       float: right;
-      width: calc(100% - 50px); }
-    .sidebar ul img {
+      width: calc(100% - 50px);
+      padding: 0; }
+    .sidebar ul .thumb {
       display: block;
       height: 50px;
       width: 50px;
       float: left; }
-    .sidebar ul h3, .sidebar ul h4 {
+    .sidebar ul h3, .sidebar ul address, .sidebar ul .rating {
+      position: relative;
       margin: 0;
-      margin-left: 10px;
+      padding-left: 10px;
+      padding-bottom: 5px;
       font-weight: 400; }
+    .sidebar ul address {
+      font-size: 0.8em; }
+    .sidebar ul a {
+      clear: both;
+      display: block;
+      margin: auto;
+      background: #ff5b5b;
+      color: white;
+      padding: 5px;
+      border-radius: 20px;
+      width: 50%;
+      height: 20px;
+      text-align: center;
+      text-decoration: none; }
+    .sidebar ul .snippet {
+      font-size: 0.8em;
+      height: 0em;
+      overflow: hidden;
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-transition: all 200ms ease-in-out;
+              transition: all 200ms ease-in-out; }
+    .sidebar ul li:hover .snippet {
+      height: 6em;
+      -webkit-transform: scale(1);
+              transform: scale(1); }
 
 #map {
   height: 100vh; }
