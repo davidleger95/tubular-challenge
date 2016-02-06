@@ -37,6 +37,9 @@ I thought working with the Yelp Search API was fairly simple, as well as Google 
 
 And lastly, dealing with animations and functions associated with user event's was rough in AngularJS. Coming from jQuery, I find my abilities to be rather limited. I'm guessing that's just part of the learning curve with Angular though. Once I have some more practice I assume this will get easier.
 
+I didn't spend too much time on the UI because functionality was the focus of this challenge. So I think that could use some work as well.
+
+Overall, I'm moderately satisfied with the results I was able to produce. I think with a bit more practice, I'll be more comfortable using AngularJS and be able to produce better work using the framework. 
 
 ## [Live Demo](http://davidleger95.github.io/tubular-challenge/)
 
