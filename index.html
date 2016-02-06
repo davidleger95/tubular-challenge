@@ -7,7 +7,7 @@
     </head>
     <body ng-app="App">
         
-        <div ng-controller="BusinessCtrl">
+        <div ng-controller="MainCtrl">
             <nav class="col-full search-bar">
                 <form class="search">
                     <input type="text" 
@@ -22,22 +22,40 @@
                 <div class="right">
                     <label class="brand"> Min. Stars</label>
                     <ul class="toggle">
-                        <li ng-click="filterRating(0)">
+                        <li ng-if="minRating == 0" ng-click="filterRating(0)">
                             All
                         </li>
-                        <li class="off" ng-click="filterRating(1)">
+                        <li ng-if="minRating != 0" class="off" ng-click="filterRating(0)">
+                            All
+                        </li>
+                        <li ng-if="minRating >= 1" ng-click="filterRating(1)">
                             1
                         </li>
-                        <li class="off" ng-click="filterRating(2)">
+                        <li ng-if="minRating < 1" class="off" ng-click="filterRating(1)">
+                            1
+                        </li>
+                        <li ng-if="minRating >= 2" ng-click="filterRating(2)">
                             2
                         </li>
-                        <li class="off" ng-click="filterRating(3)">
+                        <li ng-if="minRating < 2" class="off" ng-click="filterRating(2)">
+                            2
+                        </li>
+                        <li ng-if="minRating >= 3" ng-click="filterRating(3)">
                             3
                         </li>
-                        <li class="off" ng-click="filterRating(4)">
+                        <li ng-if="minRating < 3" class="off" ng-click="filterRating(3)">
+                            3
+                        </li>
+                        <li ng-if="minRating >= 4" ng-click="filterRating(4)">
                             4
                         </li>
-                        <li class="off" ng-click="filterRating(5)">
+                        <li ng-if="minRating < 4" class="off" ng-click="filterRating(4)">
+                            4
+                        </li>
+                        <li ng-if="minRating >= 5" ng-click="filterRating(5)">
+                            5
+                        </li>
+                        <li ng-if="minRating < 5" class="off" ng-click="filterRating(5)">
                             5
                         </li>
                     </ul>

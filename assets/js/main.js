@@ -1,6 +1,9 @@
 (function(){
     'use strict';
     
+    // **********************************************
+    //  Map Functions
+    // **********************************************
     var markers = [];
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var labelIndex = 0;
@@ -11,73 +14,18 @@
         return result;
     }
     
-    function adjustMap(places){
-        clearMarkers();
-        // Adjust Map
-        var avgLat = 0, avgLng = 0, currLat = 0, currLng = 0, marker, info;
-
-        for(var i= 0; i < places.length; i++){
-            currLat = places[i].location.coordinate.latitude;
-            currLng = places[i].location.coordinate.longitude;
-            
-            addMarkerWithTimeout({lat: currLat, lng: currLng}, 50*i, places[i].rating);
-            
-            avgLat += currLat;
-            avgLng += currLng;
-            
-        }
-        avgLat /= places.length;
-        avgLng /= places.length;
-        console.log(avgLat +","+avgLng);
-
-        map.panTo({lat: avgLat, lng: avgLng});
-        map.setZoom(14);
-    }
-    
-    function addMarkerWithTimeout(position, timeout, rating) {
-        
-        window.setTimeout(function() {
-        markers.push(new google.maps.Marker({
-          position: position,
-            label: labels[labelIndex++ % labels.length],
-          map: map,
-            rating: rating,
-          animation: google.maps.Animation.DROP
-        }));
-      }, timeout);
-    }
-    
-    function clearMarkers() {
-      for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-      }
-      markers = [];
-    }
-    
-    function hideMarker(markerRating) {
-      for (var i = 0; i < markers.length; i++) {
-        if(markerRating > markers[i].rating)
-          markers[i].setMap(null);
-      }
-    }
-    function showMarker(markerRating) {
-      for (var i = 0; i < markers.length; i++) {
-        if(markerRating < markers[i].rating)
-          markers[i].setMap(map);
-      }
-    }
-    
+    // **********************************************
+    //  Angular App
+    // **********************************************
     var app = angular.module('App', []);
 
-
-    app.controller('BusinessCtrl', ['$scope', '$http', 'YelpAPI', 'MyLocation', function($scope, $http, YelpAPI, MyLocation) {
+    app.controller('MainCtrl', ['$scope', '$http', 'YelpAPI', 'MyLocation', 'Map', function($scope, $http, YelpAPI, MyLocation, Map) {
         $scope.businesses = [];
         $scope.minRating = 0;
         $scope.filterRating = function(val){
             $scope.minRating = val;
-            hideMarker(val);
-            showMarker(val);
-            $scope.class = "";
+            Map.hideMarker(val);
+            Map.showMarker(val);
         };
         $scope.labels = labels;
         $scope.searchLocation = "";
@@ -86,8 +34,7 @@
             YelpAPI.retrieveYelp($scope.searchLocation, $scope.category, $scope.position, function(data) {
                 $scope.businesses = data.businesses;
                 
-                
-                adjustMap($scope.businesses);
+                Map.adjust($scope.businesses);
 
             });
         }
@@ -99,6 +46,11 @@
 
     }]);
     
+    // **********************************************
+    //  App Factories
+    // **********************************************
+    
+    // Gets the current geolocation of the user and marks the location on the map.
     app.factory("MyLocation", function(){
         var geoLoc = {};
         geoLoc.getLocation = function(callback){
@@ -122,7 +74,76 @@
         }
         return geoLoc;
     });
+    
+    // Controls map functionality
+    app.factory("Map", function(){
+        var mapF = {};
+        
+         // Repositions map and adds markers after a search
+        mapF.adjust = function(places){
 
+            clearMarkers();     // remove all markers currently on the map
+
+            var avgLat = 0, avgLng = 0, currLat = 0, currLng = 0, marker;
+
+            // Adds markers to map and calculates average position for map centering
+            for(var i= 0; i < places.length; i++){
+                currLat = places[i].location.coordinate.latitude;
+                currLng = places[i].location.coordinate.longitude;
+                avgLat += currLat;
+                avgLng += currLng;
+                addMarkerWithTimeout({lat: currLat, lng: currLng}, 50*i, places[i].rating);
+            }
+            avgLat /= places.length;
+            avgLng /= places.length;
+
+            // Reposition map to the average of all search results
+            map.panTo({lat: avgLat, lng: avgLng});
+            map.setZoom(14);
+        }
+        
+        // Hides markers based on rating filter
+        mapF.hideMarker = function(markerRating) {
+            for (var i = 0; i < markers.length; i++) {
+                if(markerRating > markers[i].rating)
+                    markers[i].setMap(null);
+            }
+        }
+    
+        // Shows markers based on rating filter
+        mapF.showMarker = function(markerRating) {
+            for (var i = 0; i < markers.length; i++) {
+                if(markerRating < markers[i].rating)
+                    markers[i].setMap(map);
+            }
+        }
+        
+        return mapF;
+    });
+    
+    // Adds markers to the map with an animation.
+    function addMarkerWithTimeout(position, timeout, rating) {
+        
+        window.setTimeout(function() {
+        markers.push(new google.maps.Marker({
+          position: position,
+            label: labels[labelIndex++ % labels.length],
+          map: map,
+            rating: rating,
+          animation: google.maps.Animation.DROP
+        }));
+      }, timeout);
+    }
+    
+    // Destroys all markers on the map
+    function clearMarkers() {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+      markers = [];
+    }
+
+    // Gets data from Yelp's Search API
     app.factory("YelpAPI", function($http) {
         var yelp = {};
             yelp.retrieveYelp = function(loc, cat, geoloc, callback) {
