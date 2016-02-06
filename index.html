@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Tubular Challenge</title>
+        <link rel="stylesheet" href="assets/css/main.css" />
+    </head>
+    <body ng-app="App">
+        
+        <div ng-controller="BusinessCtrl">
+            <nav class="col-full search-bar">
+                <h1 class="brand">Yelp! App</h1>
+                <form class="search">
+                    <input type="text" 
+                           placeholder="Location/Address" 
+                           ng-model="searchLocation"/>
+                    <input type="text" 
+                           placeholder="Topic" 
+                           ng-model="category"/>
+
+                    <input type="submit" value="Search" ng-click="search()"/>
+                </form>
+                <div>
+                    <ul class="toggle">
+                        <li>
+                            All
+                        </li>
+                        <li class="off">
+                            Open Now
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="col-sm sidebar">
+            <ul ng-if="businesses">
+                <li data-ng-repeat="business in businesses">
+                    <img src="{{ business.image_url }}" alt="business image">
+                    <div class="info">
+                        <span ng-if="business.is_closed"
+                              class="status closed">closed</span>
+                        <span ng-if="!business.is_closed"
+                              class="status">open</span>
+                        <h3>{{ business.name }}</h3>
+                        <h4>
+                            <span ng-repeat="field in business.location.address">
+                                {{ field }}
+                            </span>, {{ business.location.city }}
+                        </h4>
+                    </div>
+                </li>
+            </ul>
+            <div ng-if="!businesses">Please search for a type of business.</div>
+            </div>
+        </div>
+        <div id="map"></div>
+        
+        <!-- JavaScript -->
+        <script type="text/javascript">
+
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 45.95853750266372, lng: -66.64505015215775},
+    zoom: 14
+  });
+}
+
+    </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js" type="text/javascript"></script>
+        <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG1NFV2ABQ16JfnvUv0qfLo7a9wqPtAi0&callback=initMap">
+    </script>
+        <script src="https://raw.githubusercontent.com/bettiolo/oauth-signature-js/master/dist/oauth-signature.min.js"></script>
+        <script src="assets/js/main.js" type="text/javascript"></script>
+        
+        <!-- END JavaScript -->
+    </body>
+</html>

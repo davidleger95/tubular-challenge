@@ -1,0 +1,64 @@
+.search-bar{
+    z-index: 2;
+    position: fixed;
+    
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    
+    background: $primary;
+    box-shadow: 0px 0px 20px rgba(black, 0.5);
+    .brand{
+        font-size: 1.2em;
+        float: left;
+        color: white;
+        font-weight: 400;
+        padding: 0 10px;
+    }
+    form.search{
+        padding: 10px;
+        float: left;
+        
+        
+    }
+    input, .toggle li{
+        //height: 10px;
+        margin: 0px;
+        border: none;
+        background: rgba(white, 0.8);
+        color: $primary;
+        padding: 8px 15px;
+        &:last-child{
+            border-radius: 0 20px 20px 0;
+
+        }
+        &:first-child{
+            border-radius: 20px 0 0 20px;
+        }
+        &:focus{
+            outline: none;
+            background: rgba(white, 0.9);
+        }
+        &[type="submit"]{
+            background-color: white;
+        }
+        
+    }
+    .toggle{
+        list-style: none;
+        margin: 10px;
+        cursor: pointer;
+        
+        li{
+            float: left;
+            &.off{
+                background: none;
+                border: 1px solid rgba(white, 0.8);
+                padding: 7px 15px;
+                color: white;
+            }
+        }
+    }
+    
+}

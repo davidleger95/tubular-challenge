@@ -1,0 +1,14 @@
+html, body { height: 100%; margin: 0; padding: 0; }
+
+.col-full{
+    width: 100vw;
+}
+
+.col-lg{
+    width: calc(100vw - 250px);
+}
+
+.col-sm{
+    
+    min-width: 250px;
+}
