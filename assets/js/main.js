@@ -33,7 +33,6 @@
         $scope.search = function(){
             YelpAPI.retrieveYelp($scope.searchLocation, $scope.category, $scope.position, function(data) {
                 $scope.businesses = data.businesses;
-                
                 Map.adjust($scope.businesses);
 
             });
@@ -41,6 +40,7 @@
         
         MyLocation.getLocation(function(data){
             $scope.position = data;
+            $scope.search();
         });
 
 
