@@ -85,7 +85,7 @@
             clearMarkers();     // remove all markers currently on the map
 
             var avgLat = 0, avgLng = 0, currLat = 0, currLng = 0, marker;
-
+            labelIndex = 0;
             // Adds markers to map and calculates average position for map centering
             for(var i= 0; i < places.length; i++){
                 currLat = places[i].location.coordinate.latitude;
